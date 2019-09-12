@@ -16,10 +16,29 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = new Board({n: n}); //fixme
+  var board = solution.rows();
+  // create a board
+  var col = n;
+  var row = n;
+  // create two variables to represent the row and column
+  // first for loop is looping through all the rows,
+  for (var i = 0; i < row; i++) {
+    for (var j = 0; j < col; j++) {
+      board[i][j] = 1;
+      if (solution.hasRowConflictAt(i) || solution.hasColConflictAt(j)) {
+        board[i][j] = 0;
+      }
+    }
+  }
+  // nested for loop is going through each column in that row
+  // inside the for loop, if statement that checks if there is conflict in the row or column
+  //  change the value from 0 to 1
+  // set var solution to the board we created
 
-  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+
+  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(board));
+  return board;
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
